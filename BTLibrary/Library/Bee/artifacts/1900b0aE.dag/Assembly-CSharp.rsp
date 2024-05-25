@@ -357,9 +357,16 @@
 -analyzer:"C:/Program Files/Unity/Hub/Editor/2022.3.14f1/Editor/Data/Tools/Unity.SourceGenerators/Unity.SourceGenerators.dll"
 "Assets/Models/Rotate.cs"
 "Assets/Scripts/BehaviourTree.cs"
+"Assets/Scripts/BTAgent.cs"
+"Assets/Scripts/DPSelector.cs"
+"Assets/Scripts/Inverter.cs"
 "Assets/Scripts/Leaf.cs"
+"Assets/Scripts/Lock.cs"
 "Assets/Scripts/Node.cs"
+"Assets/Scripts/PSelector.cs"
 "Assets/Scripts/RobberBehaviour.cs"
+"Assets/Scripts/RSelector.cs"
+"Assets/Scripts/Selector.cs"
 "Assets/Scripts/Sequence.cs"
 -langversion:9.0
 

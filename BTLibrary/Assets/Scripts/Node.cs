@@ -10,12 +10,19 @@ public class Node
     public List<Node> children = new List<Node>();
     public int currentChild = 0;
     public string name;
+    public int priorityOrder;
 
     public Node() { }
 
     public Node(string n)
     {
         name = n;
+    }
+
+    public Node(string n, int order)
+    {
+        name = n;
+        priorityOrder = order;
     }
 
     public void AddChild(Node n)
