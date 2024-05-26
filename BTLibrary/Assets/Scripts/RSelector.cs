@@ -5,6 +5,7 @@ using UnityEngine;
 public class RSelector : Node
 {
     Node[] nodeArray;
+    bool shuffled = false;
 
     public RSelector(string n)
     {
@@ -29,12 +30,16 @@ public class RSelector : Node
 
     public override Node.Status Process()
     {
+        if (!shuffled)
+        {
+            ShuffleNodes();
+            shuffled = true;
+        }
         Status childStatus = children[currentChild].Process();
-
         if (childStatus == Status.RUNNING) return Status.RUNNING;
         if (childStatus == Status.SUCCESS)
         {
-            ShuffleNodes();
+            shuffled = false;
             currentChild = 0;
             return Status.SUCCESS;
         }
@@ -42,8 +47,7 @@ public class RSelector : Node
         currentChild++;
         if (currentChild >= children.Count)
         {
-
-            ShuffleNodes();
+            shuffled = false;
             currentChild = 0;
             return Status.FAILURE;
         }

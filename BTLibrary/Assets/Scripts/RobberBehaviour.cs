@@ -9,7 +9,6 @@ public class RobberBehaviour : BTAgent
     public GameObject frontDoor;
     public GameObject diamond;
     public GameObject[] paintings;
-    public int selectedPainting = 0;
     public GameObject van;
 
     [Range(0, 1000)]
@@ -27,8 +26,14 @@ public class RobberBehaviour : BTAgent
         Leaf goToFrontDoor = new Leaf("Go to Front Door", GoToFrontDoor, 1);
         Leaf goToBackDoor = new Leaf("Go to Back Door", GoToBackDoor, 2);
         Leaf goToDiamond = new Leaf("Go to Diamond", GoToDiamond, 1);
-        Leaf goToPainting = new Leaf("Go to Painting", GoToPainting, 2);
         Leaf goToVan = new Leaf("Go to Van", GoToVan);
+
+        RSelector selectObject = new RSelector("Select Object to Steal");
+        for(int i = 0; i < paintings.Length; i++)
+        {
+            Leaf gta = new Leaf("Go to art" + paintings[i],i, GoToArt);
+            selectObject.AddChild(gta);
+        }
 
         Inverter invertMoney = new Inverter("Invert Money");
         invertMoney.AddChild(hasGotMoney);
@@ -37,16 +42,13 @@ public class RobberBehaviour : BTAgent
         openDoor.AddChild(goToFrontDoor);
         openDoor.AddChild(goToBackDoor);
 
-        PSelector stealSomething = new PSelector("Steal Something");
-        stealSomething.AddChild(goToDiamond);
-        stealSomething.AddChild(goToPainting);
-
         steal.AddChild(invertMoney);
         steal.AddChild(openDoor);
-        steal.AddChild(stealSomething);
+        steal.AddChild(selectObject);
         steal.AddChild(goToVan);
 
         tree.AddChild(steal);
+        tree.PrintTree();
     }
 
     public Node.Status HasMoney()
@@ -95,26 +97,14 @@ public class RobberBehaviour : BTAgent
         return s;
     }
 
-    public Node.Status GoToPainting()
+    public Node.Status GoToArt(int i)
     {
-        Node.Status s = Node.Status.FAILURE;
-        if (paintings[selectedPainting].activeSelf)
+        if(!paintings[i].activeSelf) return Node.Status.FAILURE;
+        Node.Status s = GoToLocation(paintings[i].transform.position);
+        if (s == Node.Status.SUCCESS)
         {
-            s = GoToLocation(paintings[selectedPainting].transform.position);
-            if (s == Node.Status.SUCCESS)
-            {
-                paintings[selectedPainting].transform.parent = this.gameObject.transform;
-                pickup = paintings[selectedPainting];
-            }
-        }
-        else
-        {
-            selectedPainting++;
-            if (selectedPainting >= paintings.Length)
-            {
-                selectedPainting = 0;
-                return Node.Status.FAILURE;
-            }
+            paintings[i].transform.parent = this.gameObject.transform;
+            pickup = paintings[i];
         }
         return s;
     }

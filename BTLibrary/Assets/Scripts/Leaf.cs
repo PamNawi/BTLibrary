@@ -7,6 +7,10 @@ public class Leaf : Node
     public delegate Status Tick();
     public Tick ProcessMethod;
 
+    public delegate Status TickM(int index);
+    public TickM ProcessMethodM;
+    public int index;
+
     public Leaf() { }
 
     public Leaf(string n, Tick pm)
@@ -14,7 +18,14 @@ public class Leaf : Node
         name = n;
         ProcessMethod = pm;
     }
-    
+
+    public Leaf(string n, int index, TickM pm)
+    {
+        name = n;
+        ProcessMethodM = pm;
+        this.index = index;
+    }
+
     public Leaf(string n, Tick pm, int order)
     {
         name = n;
@@ -26,6 +37,10 @@ public class Leaf : Node
     {
         if(ProcessMethod != null)
             return ProcessMethod();
+
+        else if (ProcessMethodM != null)
+            return ProcessMethodM(index);
+
         return Status.FAILURE;
     }
 }

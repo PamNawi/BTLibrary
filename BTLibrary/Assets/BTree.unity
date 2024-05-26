@@ -2132,7 +2132,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 15
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -2156,10 +2156,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e55c7732f31ce6d4abe42776505ffeb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  agent: {fileID: 0}
+  state: 0
+  treeStatus: 1
   backDoor: {fileID: 919599686}
   frontDoor: {fileID: 1791870521}
   diamond: {fileID: 1550492363}
+  paintings:
+  - {fileID: 1904932022}
+  - {fileID: 1101234485}
+  - {fileID: 1922895633}
+  - {fileID: 1544815185}
+  - {fileID: 1959054990}
+  - {fileID: 925317490}
+  - {fileID: 425408384}
+  - {fileID: 915494408}
   van: {fileID: 936960364}
+  money: 460
+  pickup: {fileID: 0}
 --- !u!1 &716268924
 GameObject:
   m_ObjectHideFlags: 0
@@ -2930,7 +2944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d5bb4a1de5ea74ba3460b48664fe14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLocked: 1
+  isLocked: 0
 --- !u!1 &925317490
 GameObject:
   m_ObjectHideFlags: 0
@@ -5820,7 +5834,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2d5bb4a1de5ea74ba3460b48664fe14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isLocked: 1
+  isLocked: 0
 --- !u!4 &1796479289 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a5028766c6c2448878d200bb33de1f59, type: 3}
