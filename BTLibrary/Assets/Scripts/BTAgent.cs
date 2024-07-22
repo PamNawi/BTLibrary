@@ -24,6 +24,22 @@ public class BTAgent : MonoBehaviour
         StartCoroutine("Behave");
     }
 
+    public Node.Status CanSee(Vector3 target, string tag, float distance, float maxAngle)
+    {
+        Vector3 directionTarget = target - transform.position;
+        float angle = Vector3.Angle(directionTarget, transform.forward);
+
+        if (angle <= maxAngle || directionTarget.magnitude <= distance)
+        {
+
+        }
+    }
+
+    public Node.Status Flee()
+    {
+
+    }
+
     public Node.Status GoToLocation(Vector3 destination)
     {
         float distanceToTarget = Vector3.Distance(destination, this.transform.position);
